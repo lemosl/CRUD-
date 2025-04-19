@@ -7,6 +7,7 @@ import {MatInputModule} from '@angular/material/input'
 import{MatIconModule} from '@angular/material/icon'
 import{MatButtonModule} from '@angular/material/button'
 import { Client } from './client';
+import { ClientService } from '../client.service';
 
 
 
@@ -18,16 +19,24 @@ import { Client } from './client';
     FormsModule,
     MatFormFieldModule,
     MatInputModule, MatIconModule,
-    MatButtonModule ],
+    MatButtonModule,  ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
+ 
+  constructor(private service: ClientService){
+
+  }
+
 
   client: Client = Client.newClient()
 
   save(){
-    console.log("Os Dados cliente: ", this.client)
+    this.service.save(this.client);
   }
+
+
+
 
 }
