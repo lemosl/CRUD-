@@ -10,6 +10,7 @@ export class ClientService {
 
 
   save(client:Client) {
+
     console.log(client)
     const storage = this.getStorage();
     storage.push(client);
@@ -19,7 +20,24 @@ export class ClientService {
 
   }
 
-  getStorage() : Client[] {
+   ClientSearch(nameSearsh: string) : Client[] {
+
+
+
+   const client = this.getStorage();
+
+   if (!nameSearsh){
+    return client;
+   }
+
+   return client.filter(client =>  client.name?.indexOf(nameSearsh) !== -1)
+
+
+}
+
+
+
+ private getStorage() : Client[] {
 
     const ClientRepository = localStorage.getItem (ClientService.REPO_CLIENT);
   //if there is a database

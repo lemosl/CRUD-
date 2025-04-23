@@ -3,11 +3,11 @@ import {v4 as uuid} from 'uuid'
 export class Client {
 
   id?: string;
-  nif?:  string;
   name?:  string;
+  nif?:  string;
   phone?:  number;
   date?: string;
-
+  email?: string;
 
 
 
