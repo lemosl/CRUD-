@@ -10,6 +10,7 @@ import{MatButtonModule} from '@angular/material/button'
 import{MatTableModule} from '@angular/material/table'
 import { ClientService } from '../client.service';
 import { Client } from '../register/client';
+import { Route, Router } from '@angular/router';
 
 
 @Component({
@@ -30,8 +31,16 @@ import { Client } from '../register/client';
 export class ConsultComponent implements OnInit  {
   nameSearsh: string ="";
   clientsList : Client[] = [];
-  columnltable: string[] = ["id","name","nif","dateOfBirth","email", "phone","action"]
-  constructor(private service: ClientService){
+  columnltable: string[] = ["id","name","nif","dateOfBirth","email", "phone","action"];
+  deleted:boolean = false;
+
+  constructor(
+
+    private service: ClientService,
+    private route: Router
+
+
+  ){
   }
 
 ngOnInit(){
@@ -44,4 +53,21 @@ this.clientsList = this.service.ClientSearch('');
 search(){
   this.clientsList = this.service.ClientSearch(this.nameSearsh)
 }
+
+prepareEdit(id: string){
+
+  this.route.navigate( ['/register'], { queryParams: {"id": id} })
+
+
+ }
+
+ prepareDelete(){
+  this.deleted = true;
+ }
+
+ deleteItem(client: Client){
+  this.service.deletedItem(client);
+  this.deleted = false;
+ }
+
 }

@@ -10,13 +10,36 @@ export class ClientService {
 
 
   save(client:Client) {
-
-    console.log(client)
     const storage = this.getStorage();
+    console.log(localStorage.getItem(ClientService.REPO_CLIENT));
     storage.push(client);
-
     //update your BD
-    localStorage.setItem(ClientService.REPO_CLIENT, JSON.stringify(storage))
+    localStorage.setItem(ClientService.REPO_CLIENT, JSON.stringify(storage));
+  }
+
+  NewUpdated(client: Client){
+
+    const storage =this.getStorage();
+    storage.forEach(c => {
+      if(c.id === client.id){
+          Object.assign(c,client);
+      }
+    })
+    localStorage.setItem(ClientService.REPO_CLIENT, JSON.stringify(storage));
+  }
+
+  deletedItem(client : Client){
+   const storage = this.getStorage();
+
+   const newList = storage.filter(c=> client.id !== client.id )
+
+   localStorage.setItem(ClientService.REPO_CLIENT, JSON.stringify(newList));
+
+  // otherway
+  // const indexItem = storage.indexOf(client);
+  //if (indexItem >-1) {
+  // storage.splice(indexIteam, 1)
+  //}
 
   }
 
@@ -35,7 +58,10 @@ export class ClientService {
 
 }
 
-
+searchClientById(id: string): Client | undefined{
+       const clients = this.getStorage()
+       return clients.find(clients  => clients.id === id)
+}
 
  private getStorage() : Client[] {
 
