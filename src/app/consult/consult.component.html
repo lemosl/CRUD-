@@ -73,17 +73,14 @@
                   <th mat-header-cell *matHeaderCellDef></th>
                   <td mat-cell *matCellDef="let client">
                     <button type="button" mat-flat-button  class="bg-red" (click)="prepareEdit(client.id)"><mat-icon fontIcon="edit"></mat-icon>Edit</button>
-                    @if(!deleted){
-                    <button type="button" mat-button  class="bg-red" (click)="prepareDelete()"><mat-icon fontIcon="delete" (click)="prepareDelete()"></mat-icon>Delet</button  >
+                    @if(!client.deleted){
+                    <button type="button" mat-button  class="bg-red" (click)="prepareDelete(client)"><mat-icon fontIcon="delete"></mat-icon>Delet</button  >
                   }@else{
-                    <button type="button" mat-button  class="bg-red" (click)="deleteItem(client.id)"><mat-icon fontIcon="question_mark" (click)="deleteItem(client)" ></mat-icon>confirm</button>
+                    <button type="button" mat-button  class="bg-red" (click)="deleted(client)"><mat-icon fontIcon="question_mark" ></mat-icon>confirm</button>
                   }
                   </td>
-
                 </ng-container>
-
-
-                 <tr mat-header-row *matHeaderRowDef="columnltable"></tr>
+                <tr mat-header-row *matHeaderRowDef="columnltable"></tr>
                  <tr mat-row *matRowDef="let row; columns: columnltable"></tr>
           </table>
         </mat-card-content>

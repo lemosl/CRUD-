@@ -8,6 +8,7 @@ export class Client {
   phone?:  number;
   date?: string;
   email?: string;
+  deleted: boolean = false;
 
 
 

@@ -29,7 +29,7 @@
               <div fixlayout="column" fxFlex="400px">
                 <mat-form-field class="full-width">
                   <mat-label>Nif: *</mat-label>
-                  <input type="text" [(ngModel)] ="client.nif" name="nif"  placeholder="22********" matInput>
+                  <input type="text" [(ngModel)] ="client.nif" name="nif" mask="000000000"  placeholder="22********" matInput>
                 </mat-form-field>
             </div>
             </div>
@@ -38,7 +38,8 @@
               <div fixlayout="column" fxFlex="400px">
                 <mat-form-field class="full-width">
                  <mat-label>Phone Number: *</mat-label>
-                  <input type="number" [(ngModel)] ="client.phone" name="phone" placeholder="99******" matInput>
+                  <input type="number" [(ngModel)] ="client.phone" name="phone" mask="000000000" placeholder="99******" matInput>
+
                 </mat-form-field>
                </div>
             </div>
@@ -47,7 +48,7 @@
               <div fixlayout="column" fxFlex="400px">
                 <mat-form-field class="full-width">
                  <mat-label>Date of birth *</mat-label>
-                  <input type="text" [(ngModel)] ="client.date" name="date"  placeholder="DD/MM/YYYY"  matInput>
+                  <input type="text" [(ngModel)] ="client.date" name="date" mask="00/00/0000"  placeholder="DD/MM/YYYY"  matInput>
                 </mat-form-field>
                </div>
             </div>

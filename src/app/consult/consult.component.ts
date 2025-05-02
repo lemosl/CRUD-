@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FlexLayoutModule} from '@angular/flex-layout'
 import  {MatCardModule} from '@angular/material/card'
@@ -8,9 +8,12 @@ import {MatInputModule} from '@angular/material/input'
 import{MatIconModule} from '@angular/material/icon'
 import{MatButtonModule} from '@angular/material/button'
 import{MatTableModule} from '@angular/material/table'
+import{MatSnackBar} from '@angular/material/snack-bar'
 import { ClientService } from '../client.service';
 import { Client } from '../register/client';
 import { Route, Router } from '@angular/router';
+import {NgxMaskDirective, provideNgxMask} from 'ngx-mask';
+
 
 
 @Component({
@@ -23,8 +26,9 @@ import { Route, Router } from '@angular/router';
             MatButtonModule,
             MatTableModule,
             FormsModule,
-          CommonModule,
-      MatIconModule],
+            CommonModule,
+           MatIconModule,
+           MatButtonModule  ],
   templateUrl:  './consult.component.html',
   styleUrl: './consult.component.scss'
 })
@@ -32,7 +36,7 @@ export class ConsultComponent implements OnInit  {
   nameSearsh: string ="";
   clientsList : Client[] = [];
   columnltable: string[] = ["id","name","nif","dateOfBirth","email", "phone","action"];
-  deleted:boolean = false;
+  snack: MatSnackBar = inject(MatSnackBar)
 
   constructor(
 
@@ -61,13 +65,17 @@ prepareEdit(id: string){
 
  }
 
- prepareDelete(){
-  this.deleted = true;
+ prepareDelete(client: Client){
+  client.deleted = true;
  }
 
- deleteItem(client: Client){
+ deleted(client: Client){
   this.service.deletedItem(client);
-  this.deleted = false;
+  this.clientsList= this.service.ClientSearch("");
+  this.snack.open("Client successfully deleted!",'ok')
  }
+
+
+
 
 }

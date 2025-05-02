@@ -31,7 +31,7 @@ export class ClientService {
   deletedItem(client : Client){
    const storage = this.getStorage();
 
-   const newList = storage.filter(c=> client.id !== client.id )
+   const newList = storage.filter(c=> c.id !== client.id )
 
    localStorage.setItem(ClientService.REPO_CLIENT, JSON.stringify(newList));
 
